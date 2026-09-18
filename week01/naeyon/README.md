@@ -1,4 +1,3 @@
-```md
 # Week 01 - Java 기본 문법
 
 ## 1. Java 기본 구조
@@ -31,15 +30,13 @@ public class HelloWorld {
 내용을 출력한 뒤 줄을 바꾼다.
 
 ```java
-System.out.println("안녕하세요");
-System.out.println("Java 공부 시작!");
+System.out.println("Hello");
 ```
 
 출력 결과
 
 ```text
-안녕하세요
-Java 공부 시작!
+Hello
 ```
 
 ### print
@@ -159,51 +156,16 @@ System.out.println(age);
 
 ## 6. 기본 자료형
 
-### int
-
-정수를 저장한다.
-
-```java
-int age = 20;
-int score = 95;
-```
-
-### double
-
-소수점이 있는 숫자를 저장한다.
-
-```java
-double height = 165.5;
-```
-
-### char
-
-한 글자를 저장한다.
-
-```java
-char grade = 'A';
-```
-
-`char`는 작은따옴표 `' '`를 사용한다.
-
-### String
-
-문자열을 저장한다.
-
-```java
-String name = "나연";
-```
-
-`String`은 큰따옴표 `" "`를 사용한다.
-
-### boolean
-
-참 또는 거짓을 저장한다.
-
-```java
-boolean student = true;
-boolean adult = false;
-```
+| 자료형 | 설명 | 예시 |
+|---|---|---|
+| `byte` | 작은 범위의 정수 | `byte num = 10;` |
+| `short` | 정수 | `short num = 100;` |
+| `int` | 일반적으로 사용하는 정수 | `int age = 20;` |
+| `long` | 큰 범위의 정수 | `long population = 8000000000L;` |
+| `float` | 실수 | `float height = 165.5F;` |
+| `double` | 일반적으로 사용하는 실수 | `double height = 165.5;` |
+| `char` | 한 글자의 문자 | `char grade = 'A';` |
+| `boolean` | 참 또는 거짓 | `boolean student = true;` |
 
 ---
 
@@ -376,39 +338,3 @@ System.out.println(name + " / " + age);
 
 ---
 
-# 기본 실습
-
-```java
-public class BasicPractice {
-    public static void main(String[] args) {
-
-        String name = "나연";
-        int age = 20;
-        double height = 165.5;
-
-        System.out.println("이름: " + name);
-        System.out.println("나이: " + age);
-        System.out.println("키: " + height);
-
-        int a = 10;
-        int b = 3;
-
-        System.out.println("더하기: " + (a + b));
-        System.out.println("빼기: " + (a - b));
-        System.out.println("곱하기: " + (a * b));
-        System.out.println("나누기: " + (a / b));
-        System.out.println("나머지: " + (a % b));
-    }
-}
-```
-
-## 이번 학습에서 익힌 내용
-
-- Java 프로그램의 기본 구조
-- 콘솔 출력 방법
-- 변수와 기본 자료형
-- 문자열과 변수 출력
-- 산술 연산자
-- 비교 연산자
-- Scanner를 이용한 입력
-```
