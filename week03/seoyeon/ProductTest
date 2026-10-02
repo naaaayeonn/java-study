@@ -1,0 +1,39 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-09-17
+/// Lab02-3 : 쇼핑몰 상품 할인 계산
+/// /////////////////////////////////////////////////
+
+
+class Product{
+    private String name;
+    private int price;
+    private double discountRate;
+
+    public Product(String name, int price, double discountRate){
+        this.name = name;
+        this.price = price;
+        this.discountRate = discountRate;
+    }
+    public int getDiscountPrice(){
+        return (int)(this.price * (1 - this.discountRate));
+
+    }
+    @Override
+    public String toString() {
+        return "상품명: " + name +
+                ", 정가: " + price +"원"+
+                ", 할인율: " + discountRate;
+    }
+}
+
+public class ProductTest {
+    public static void main(String[] arg){
+        Product p1 = new Product("노트북", 2000000, 0.15);
+        Product p2 = new Product("스마트폰", 1000000, 0.20);
+        Product p3 = new Product("스마트워치", 700000, 0.30);
+        System.out.println(p1 +", 할인 가격: "+p1.getDiscountPrice());
+        System.out.println(p2 +", 할인 가격: "+p2.getDiscountPrice());
+        System.out.println(p3 +", 할인 가격: "+p3.getDiscountPrice());
+    }
+}
