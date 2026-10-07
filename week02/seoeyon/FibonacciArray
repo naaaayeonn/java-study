@@ -1,0 +1,45 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-09-10
+/// Lab01-5 : 피보나치 수열
+/// /////////////////////////////////////////////////
+
+import java.util.Scanner;
+
+public class FibonacciArray{
+    public static void main(String[] args) {
+
+        //변수 선언
+        int[] fib;
+        int n;
+        Scanner sc = new Scanner(System.in);
+
+        //사용자로부터 입력받기(출력문+입력)
+        System.out.printf("출력할 항의 개수를 입력하세요: ");
+        n = sc.nextInt();
+
+        //0이하의 입력값 예외 처리
+        if(n <= 0){
+            System.out.println("1 이상의 정수를 입력해주세요.");
+            return;
+        }
+
+        //입력받은 항의 개수를 크기로 배열 생성
+        fib = new int[n];
+
+        //초기값 설정
+        fib[0] = 1;
+        fib[1] = 1;
+
+        //배열에 피보나치 값 저장(인덱스 2부터 마지막 항까지)
+        for(int i=2; i<fib.length; i++)
+            fib[i] = fib[i-2]+fib[i-1];
+
+        //결과 출력
+        System.out.printf("피보나치 수열: ");
+        for(int j=0; j<fib.length; j++) {
+            System.out.print(fib[j]);
+            System.out.print(" ");
+        }
+    }
+}
