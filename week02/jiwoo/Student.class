@@ -1,0 +1,31 @@
+class Student {
+    // 필드
+    String name;
+    int age;
+    String major;
+
+    // 생성자
+    Student(String name, int age, String major) {
+        this.name = name;
+        this.age = age;
+        this.major = major;
+    }
+
+    // 메서드
+    void showInfo() {
+        System.out.println("이름: " + name);
+        System.out.println("나이: " + age);
+        System.out.println("전공: " + major);
+    }
+}
+
+public class StudentTest {
+    public static void main(String[] args) {
+
+        // 객체 생성
+        Student s1 = new Student("홍길동", 20, "데이터사이언스");
+
+        // 메서드 호출
+        s1.showInfo();
+    }
+}

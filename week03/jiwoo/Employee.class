@@ -1,0 +1,43 @@
+class Employee {
+    protected String name;
+    protected String department;
+
+    // 부모 클래스 생성자
+    Employee(String name, String department) {
+        this.name = name;
+        this.department = department;
+    }
+
+    // 부모 클래스 메서드
+    void showInfo() {
+        System.out.println("이름: " + name);
+        System.out.println("부서: " + department);
+    }
+}
+
+class FullTimeEmployee extends Employee {
+    private int salary;
+
+    // 자식 클래스 생성자
+    FullTimeEmployee(String name, String department, int salary) {
+        super(name, department);
+        this.salary = salary;
+    }
+
+    // 메서드 오버라이딩
+    @Override
+    void showInfo() {
+        super.showInfo();
+        System.out.println("월급: " + salary + "원");
+    }
+}
+
+public class EmployeeTest {
+    public static void main(String[] args) {
+
+        FullTimeEmployee e1 =
+                new FullTimeEmployee("홍길동", "개발팀", 3000000);
+
+        e1.showInfo();
+    }
+}
