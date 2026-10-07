@@ -1,0 +1,434 @@
+# Week 02 - 클래스와 객체
+
+## 1. 학습 목표
+
+- 클래스와 객체의 개념을 이해한다.
+- 클래스의 필드와 메서드의 역할을 이해한다.
+- 생성자를 이용하여 객체를 초기화하는 방법을 학습한다.
+- `this` 키워드의 의미와 사용 방법을 이해한다.
+- 간단한 클래스를 직접 작성하고 객체를 생성하여 활용한다.
+
+---
+
+## 2. 클래스와 객체
+
+### 클래스란?
+클래스는 객체를 만들기 위한 설계도이다.  
+클래스에는 객체가 가지고 있는 속성(필드)과 기능(메서드)을 정의할 수 있다.
+
+```java
+class Student {
+    String name;
+    int studentId;
+    String major;
+
+    void introduce() {
+        System.out.println("안녕하세요. " + name + "입니다.");
+    }
+}
+```
+
+### 객체란?
+객체는 클래스를 이용하여 실제로 생성한 것이다.  
+클래스가 설계도라면 객체는 설계도를 통해 만들어진 실제 대상이라고 할 수 있다.
+
+```java
+Student student1 = new Student();
+```
+
+객체를 생성한 후 필드에 값을 저장하거나 메서드를 호출할 수 있다.
+
+```java
+student1.name = "유나";
+student1.studentId = 2514742;
+student1.major = "데이터사이언스";
+student1.introduce();
+```
+
+**실행 결과:**
+```text
+안녕하세요. 유나입니다.
+```
+
+---
+
+## 3. 필드
+필드는 객체가 가지고 있는 데이터를 저장하는 변수이다.  
+예를 들어 학생 객체의 이름과 학번을 저장하고 싶다면 다음과 같이 작성할 수 있다.
+
+```java
+class Student {
+    String name;
+    int studentId;
+    String major;
+}
+```
+
+각 객체는 자신의 필드 값을 가질 수 있다.
+
+```java
+Student student1 = new Student();
+Student student2 = new Student();
+
+student1.name = "유나";
+student2.name = "지민";
+
+System.out.println(student1.name);
+System.out.println(student2.name);
+```
+
+**실행 결과:**
+```text
+유나
+지민
+```
+같은 `Student` 클래스로 만들어진 객체라도 각각 다른 데이터를 저장할 수 있다.
+
+---
+
+## 4. 메서드
+메서드는 객체가 수행할 수 있는 기능을 정의한다.
+
+```java
+class Student {
+    String name;
+
+    void introduce() {
+        System.out.println("안녕하세요. " + name + "입니다.");
+    }
+}
+```
+
+객체를 생성한 후 메서드를 호출할 수 있다.
+
+```java
+Student student = new Student();
+student.name = "유나";
+student.introduce();
+```
+
+메서드를 사용하면 객체가 수행해야 하는 기능을 클래스 내부에 정리할 수 있다.
+
+---
+
+## 5. 생성자
+생성자는 객체가 생성될 때 호출되는 특별한 메서드이다.  
+생성자를 이용하면 객체를 생성하면서 필드의 값을 초기화할 수 있다.
+
+```java
+class Student {
+    String name;
+    int studentId;
+
+    Student(String name, int studentId) {
+        this.name = name;
+        this.studentId = studentId;
+    }
+}
+```
+
+이제 객체를 생성할 때 바로 값을 전달할 수 있다.
+
+```java
+Student student = new Student("유나", 2514742);
+System.out.println(student.name);
+System.out.println(student.studentId);
+```
+
+**실행 결과:**
+```text
+유나
+2514742
+```
+생성자를 사용하면 객체를 생성한 후 각각의 필드에 값을 따로 저장하는 과정을 줄일 수 있다.
+
+---
+
+## 6. this 키워드
+`this`는 현재 객체 자신을 의미한다.  
+생성자의 매개변수 이름과 필드의 이름이 같을 때 `this`를 사용하면 둘을 구분할 수 있다.
+
+```java
+class Student {
+    String name;
+    int studentId;
+
+    Student(String name, int studentId) {
+        this.name = name;
+        this.studentId = studentId;
+    }
+}
+```
+
+여기서 `this.name`은 현재 객체의 `name` 필드를 의미하고, `name`은 생성자에 전달된 매개변수를 의미한다.  
+따라서 다음 코드는 현재 객체의 `name` 필드에 매개변수로 전달받은 `name`을 저장한다.
+
+```java
+this.name = name;
+```
+
+---
+
+## 7. 실습 1 - 학생 클래스 만들기
+학생의 이름과 전공을 저장하고 자기소개를 출력하는 클래스를 작성하였다.
+
+```java
+class Student {
+    String name;
+    String major;
+
+    Student(String name, String major) {
+        this.name = name;
+        this.major = major;
+    }
+
+    void introduce() {
+        System.out.println("이름: " + name);
+        System.out.println("전공: " + major);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("유나", "데이터사이언스");
+        student.introduce();
+    }
+}
+```
+
+**실행 결과:**
+```text
+이름: 유나
+전공: 데이터사이언스
+```
+
+**학습한 내용:**  
+생성자를 이용하면 객체를 생성할 때 필요한 초기값을 전달할 수 있어서 객체를 초기화하기 편리하다는 것을 확인하였다.  
+또한 `this`를 사용하여 현재 객체의 필드와 생성자의 매개변수를 구분할 수 있었다.
+
+---
+
+## 8. 실습 2 - 상품 클래스 만들기
+상품의 이름과 가격을 저장하고 상품 정보를 출력하는 클래스를 작성하였다.
+
+```java
+class Product {
+    String name;
+    int price;
+
+    Product(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    void showInfo() {
+        System.out.println("상품명: " + name);
+        System.out.println("가격: " + price + "원");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Product product = new Product("노트북", 1000000);
+        product.showInfo();
+    }
+}
+```
+
+**실행 결과:**
+```text
+상품명: 노트북
+가격: 1000000원
+```
+
+---
+
+## 9. 실습 3 - 계좌 클래스 만들기
+계좌 객체의 잔액을 관리하는 간단한 클래스를 작성하였다.
+
+```java
+class Account {
+    String owner;
+    int balance;
+
+    Account(String owner, int balance) {
+        this.owner = owner;
+        this.balance = balance;
+    }
+
+    void deposit(int amount) {
+        balance += amount;
+    }
+
+    void showBalance() {
+        System.out.println(owner + "님의 잔액: " + balance + "원");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Account account = new Account("유나", 10000);
+        account.deposit(5000);
+        account.showBalance();
+    }
+}
+```
+
+**실행 결과:**
+```text
+유나님의 잔액: 15000원
+```
+
+**학습한 내용:**  
+객체의 데이터를 단순히 저장하는 것뿐만 아니라 메서드를 이용하여 객체의 상태를 변경할 수 있다는 것을 확인하였다.
+
+---
+
+## 10. 문제 풀이
+
+### 문제 1. 학생 정보 관리
+
+**문제:**  
+학생의 이름과 점수를 저장하는 `Student` 클래스를 만들고, 학생의 점수를 출력하는 프로그램을 작성한다.
+
+**풀이 방법:**
+1. `Student` 클래스를 생성한다.
+2. 이름과 점수를 필드로 선언한다.
+3. 생성자를 이용하여 이름과 점수를 초기화한다.
+4. 점수를 출력하는 메서드를 작성한다.
+5. `main`에서 객체를 생성하고 메서드를 호출한다.
+
+**코드:**
+```java
+class Student {
+    String name;
+    int score;
+
+    Student(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    void showScore() {
+        System.out.println(name + "의 점수: " + score);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("유나", 90);
+        student.showScore();
+    }
+}
+```
+
+**새롭게 알게 된 내용:**  
+생성자를 이용하면 객체를 만들 때 필요한 데이터를 한 번에 전달할 수 있어서 객체를 초기화하기 편리하다는 것을 알게 되었다.
+
+---
+
+### 문제 2. 상품 가격 계산
+
+**문제:**  
+상품의 이름과 가격을 저장하는 `Product` 클래스를 만들고, 수량을 입력받아 총 가격을 계산하는 메서드를 작성한다.
+
+**풀이 방법:**  
+상품의 가격은 필드에 저장하고, 수량은 메서드의 매개변수로 전달하여 총 가격을 계산하도록 작성하였다.
+
+**코드:**
+```java
+class Product {
+    String name;
+    int price;
+
+    Product(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    int calculatePrice(int quantity) {
+        return price * quantity;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Product product = new Product("노트", 3000);
+        int total = product.calculatePrice(4);
+        System.out.println("총 가격: " + total + "원");
+    }
+}
+```
+
+**실행 결과:**
+```text
+총 가격: 12000원
+```
+
+---
+
+### 문제 3. 계좌 입출금
+
+**문제:**  
+계좌의 소유자와 잔액을 저장하고 입금과 출금 기능을 수행하는 `Account` 클래스를 작성한다.
+
+**코드:**
+```java
+class Account {
+    String owner;
+    int balance;
+
+    Account(String owner, int balance) {
+        this.owner = owner;
+        this.balance = balance;
+    }
+
+    void deposit(int amount) {
+        balance += amount;
+    }
+
+    void withdraw(int amount) {
+        if (balance >= amount) {
+            balance -= amount;
+        } else {
+            System.out.println("잔액이 부족합니다.");
+        }
+    }
+
+    void showBalance() {
+        System.out.println(owner + "님의 잔액: " + balance + "원");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Account account = new Account("유나", 50000);
+        account.deposit(20000);
+        account.withdraw(10000);
+        account.showBalance();
+    }
+}
+```
+
+**실행 결과:**
+```text
+유나님의 잔액: 60000원
+```
+
+---
+
+## 11. 이번 주 학습 정리
+
+이번 주에는 Java의 클래스와 객체에 대해 학습하였다.  
+클래스는 객체를 만들기 위한 설계도이고, 객체는 클래스를 이용하여 실제로 생성된 대상이라는 점을 이해하였다.  
+또한 클래스 내부에 필드와 메서드를 정의하고, 생성자를 이용하여 객체를 초기화하는 방법을 학습하였다.  
+특히 생성자의 매개변수와 필드의 이름이 같은 경우 `this`를 사용하여 현재 객체의 필드를 구분할 수 있다는 것을 알게 되었다.  
+직접 학생, 상품, 계좌 클래스를 만들어 보면서 객체마다 서로 다른 데이터를 가질 수 있고, 메서드를 통해 객체의 기능을 구현할 수 있다는 점을 확인하였다.
+
+### 핵심 개념
+- **클래스:** 객체를 생성하기 위한 설계도
+- **객체:** 클래스를 이용하여 생성한 실제 대상
+- **필드:** 객체가 가지는 데이터
+- **메서드:** 객체가 수행하는 기능
+- **생성자:** 객체 생성 시 초기화를 담당
+- **this:** 현재 객체 자신을 의미
