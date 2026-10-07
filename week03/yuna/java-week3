@@ -1,0 +1,309 @@
+# Week 03 - 상속
+
+## 1. 학습 목표
+
+- 상속의 개념과 필요성 이해하기
+- 부모 클래스와 자식 클래스의 관계 이해하기
+- `extends`를 사용하여 상속 구현하기
+- `super`를 사용하여 부모 클래스의 필드와 메서드에 접근하기
+- 메서드 오버라이딩의 개념과 사용 방법 이해하기
+- 부모 클래스의 공통 기능을 여러 자식 클래스에서 활용하기
+
+---
+
+## 2. 상속(Inheritance)이란?
+
+상속은 기존 클래스의 필드와 메서드를 새로운 클래스에서 물려받아 사용하는 기능이다.  
+상속을 통해 공통적인 기능을 부모 클래스에 작성하고, 자식 클래스에서 이를 재사용할 수 있다.
+
+### 부모 클래스와 자식 클래스
+
+- **부모 클래스(Superclass):** 상속을 해주는 클래스
+- **자식 클래스(Subclass):** 부모 클래스를 상속받는 클래스
+
+예를 들어 `Animal`이라는 부모 클래스가 있고 `Dog`, `Cat`이 이를 상속받는다면 다음과 같은 관계가 된다.
+
+```text
+Animal
+ ├── Dog
+ └── Cat
+```
+
+`Dog`와 `Cat`은 `Animal`의 공통적인 기능을 물려받을 수 있다.
+
+---
+
+## 3. extends
+
+자식 클래스가 부모 클래스를 상속받을 때 `extends` 키워드를 사용한다.
+
+```java
+class Animal {
+    String name;
+
+    void eat() {
+        System.out.println("먹습니다.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("멍멍!");
+    }
+}
+```
+
+`Dog`는 `Animal`을 상속받았기 때문에 `Animal`의 `name`과 `eat()`을 사용할 수 있다.
+
+```java
+Dog dog = new Dog();
+dog.name = "초코";
+dog.eat();
+dog.bark();
+```
+
+---
+
+## 4. 상속을 사용하는 이유
+
+상속을 사용하면 부모 클래스에 공통 기능을 한 번만 작성하고 여러 자식 클래스에서 재사용할 수 있다.  
+예를 들어 여러 동물이 모두 먹는 기능을 가지고 있다면 각각의 클래스에 `eat()` 메서드를 작성하는 대신 부모 클래스인 `Animal`에 작성할 수 있다.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("먹습니다.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("멍멍!");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("야옹!");
+    }
+}
+```
+
+이렇게 하면 `Dog`와 `Cat` 모두 `eat()`을 사용할 수 있다.
+
+---
+
+## 5. super
+
+`super`는 부모 클래스를 가리키는 키워드이다.  
+부모 클래스의 필드나 메서드에 접근할 때 사용할 수 있다.
+
+```java
+class Animal {
+    String name = "동물";
+
+    void sound() {
+        System.out.println("소리를 냅니다.");
+    }
+}
+
+class Dog extends Animal {
+    String name = "강아지";
+
+    void printName() {
+        System.out.println(name);
+        System.out.println(super.name);
+    }
+}
+```
+
+- `name` → 자식 클래스의 name
+- `super.name` → 부모 클래스의 name
+
+---
+
+## 6. super()
+
+`super()`는 부모 클래스의 생성자를 호출할 때 사용한다.
+
+```java
+class Animal {
+    String name;
+
+    Animal(String name) {
+        this.name = name;
+    }
+}
+
+class Dog extends Animal {
+    Dog(String name) {
+        super(name);
+    }
+}
+```
+
+자식 클래스의 생성자에서 `super()`를 사용하여 부모 클래스의 생성자를 호출할 수 있다.
+
+---
+
+## 7. 메서드 오버라이딩(Overriding)
+
+오버라이딩은 부모 클래스에서 정의된 메서드를 자식 클래스에서 재정의하는 것이다.  
+부모 클래스의 메서드를 자식 클래스의 특성에 맞게 변경할 수 있다.
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("동물이 소리를 냅니다.");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("멍멍!");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("야옹!");
+    }
+}
+```
+
+`Dog`와 `Cat`은 모두 `Animal`을 상속받지만 `sound()`를 각각 다르게 동작하도록 만들 수 있다.
+
+### @Override
+`@Override`는 해당 메서드가 부모 클래스의 메서드를 재정의하고 있다는 것을 나타내는 어노테이션이다.  
+오버라이딩을 사용할 때 명확하게 표시하기 위해 함께 사용하는 것이 좋다.
+
+---
+
+## 8. 상속과 오버라이딩 예제
+
+```java
+class Animal {
+    void move() {
+        System.out.println("동물이 움직입니다.");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void move() {
+        System.out.println("강아지가 달립니다.");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void move() {
+        System.out.println("고양이가 움직입니다.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+
+        dog.move();
+        cat.move();
+    }
+}
+```
+
+**실행 결과:**
+```text
+강아지가 달립니다.
+고양이가 움직입니다.
+```
+
+부모 클래스의 공통 기능을 기준으로 만들고, 자식 클래스에서 필요한 부분을 오버라이딩하여 각자의 기능을 구현할 수 있다.
+
+---
+
+## 9. 상속을 활용한 클래스 설계
+
+공통적으로 사용하는 기능은 부모 클래스에 작성하고, 각 클래스에서만 필요한 기능은 자식 클래스에 작성할 수 있다.  
+예를 들어 상품을 관리하는 프로그램에서 여러 상품이 공통적으로 상품명과 가격을 가진다면 `Product`를 부모 클래스로 만들 수 있다.
+
+```java
+class Product {
+    String name;
+    int price;
+
+    void printInfo() {
+        System.out.println(name + " : " + price + "원");
+    }
+}
+
+class Food extends Product {
+    String expirationDate;
+}
+
+class Clothing extends Product {
+    String size;
+}
+```
+
+`Food`와 `Clothing`은 `Product`를 상속받기 때문에 `name`, `price`, `printInfo()`를 사용할 수 있다.
+
+---
+
+## 10. 이번 주 실습
+
+### 실습 1. Animal 상속
+`Animal` 클래스를 만들고 `Dog`, `Cat` 클래스가 이를 상속하도록 구현한다.
+- `Animal`의 공통 필드와 메서드 작성
+- `Dog`와 `Cat`에서 부모 클래스의 기능 사용
+- 각각 필요한 기능 추가
+
+### 실습 2. 메서드 오버라이딩
+`Animal`의 `sound()` 메서드를 `Dog`, `Cat`에서 각각 오버라이딩한다.
+
+**예상 결과:**
+```text
+멍멍!
+야옹!
+```
+
+### 실습 3. super 사용
+부모 클래스에 필드와 생성자를 만들고 자식 클래스에서 `super`와 `super()`를 사용해본다.
+
+---
+
+## 11. 문제 풀이
+
+### 문제 1. 학생 클래스 상속
+`Student` 클래스를 만들고 학생의 공통 정보를 관리한다. `CollegeStudent`와 `HighSchoolStudent`가 `Student`를 상속받도록 구현한다.
+- **부모 클래스:** `Student`
+- **자식 클래스:** `CollegeStudent`, `HighSchoolStudent`
+- 공통 정보는 부모 클래스에 작성
+- 각 자식 클래스에 필요한 기능 추가
+
+### 문제 2. 동물 클래스와 오버라이딩
+`Animal` 클래스를 만들고 `Dog`, `Cat`, `Bird`가 상속받도록 구현한다.  
+`Animal`의 `sound()` 메서드를 각 자식 클래스에서 오버라이딩하여 서로 다른 소리를 출력한다.
+
+### 문제 3. 상품 클래스 상속
+`Product` 클래스를 만들고 `Food`, `Clothing` 클래스를 상속 구조로 구현한다.
+- 부모 클래스에는 다음 정보를 포함한다:
+  - 상품명
+  - 가격
+- 자식 클래스에서는 각각의 상품에 필요한 정보를 추가한다.
+
+---
+
+## 12. 이번 주 학습 정리
+
+### 새롭게 배운 내용
+- 상속은 기존 클래스의 필드와 메서드를 자식 클래스가 물려받아 사용하는 기능이다.
+- `extends`를 사용하여 클래스를 상속받을 수 있다.
+- 부모 클래스에는 여러 자식 클래스에서 공통적으로 사용하는 기능을 작성할 수 있다.
+- `super`를 사용하면 부모 클래스의 필드와 메서드에 접근할 수 있다.
+- `super()`를 사용하면 부모 클래스의 생성자를 호출할 수 있다.
+- 오버라이딩은 부모 클래스의 메서드를 자식 클래스에서 재정의하는 것이다.
+- `@Override`를 사용하여 오버라이딩한 메서드를 명확하게 표시할 수 있다.
