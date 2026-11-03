@@ -1,0 +1,90 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-08
+/// Lab5-3 : 추상 클래스 실습
+/// /////////////////////////////////////////////////
+
+abstract class PairMap{
+    protected String keyArray[];
+    protected String valueArray[];
+    abstract String get(String key);
+    abstract void put(String key, String value);
+    abstract String delete(String key);
+    abstract int length();
+}
+class Dictionary extends PairMap{
+    int itemnum = 0; //현재 저장된 아이템의 개수를 위한 변수 선언 및 초기화
+    public Dictionary(int capacity){
+        //capacity만큼의 각 배열 생성
+        keyArray= new String[capacity];
+        valueArray = new String[capacity];
+    }
+    @Override
+    String get(String key) {
+        //현재 저장된 원소 개수만큼 반복
+        for(int i=0; i<itemnum; i++){
+            if(key.equals(keyArray[i])){ //key배열에서 찾고자 하는 키와 같은 값이 있는지 검사
+                return valueArray[i]; //일치하는 키가 있으면 대응하는 value 반환
+            }
+        }
+        return null; //없으면 null 반환
+    }
+    @Override
+    void put(String key, String value) {
+        for(int j=0; j< itemnum; j++){ //현재 저장된 원소 개수만큼 반복
+            if(key.equals(keyArray[j])){ //만약 동일한 key가 이미 존재한다면, 그 위치에 value값 저장
+                valueArray[j] = value;
+                return;
+            }
+        }
+        // 2. 새로운 key인 경우, 배열 용량(capacity) 범위 내에서 마지막 위치에 추가
+        if(itemnum< keyArray.length){
+            keyArray[itemnum] = key;
+            valueArray[itemnum] = value;
+            itemnum++; // 저장된 개수 증가
+        }
+    }
+    @Override
+    String delete(String key) { // key 항목 삭제 후 삭제된 value 반환
+        for(int k=0; k<itemnum; k++){ // 전체 길이가 아닌 현재 저장된 개수(itemnum)만큼만 반복하여 NullPointerException 방지
+            if(key.equals(keyArray[k])){
+                String v = valueArray[k]; // 삭제할 값 저장
+
+                // 삭제된 위치 뒤의 모든 원소들을 앞으로 한 칸씩 이동
+                for(int l=k; l< itemnum-1; l++){
+                    keyArray[l] = keyArray[l+1];
+                    valueArray[l] = valueArray[l+1];
+                }
+                // 이동 후 마지막 원소 위치를 null로 초기화하고 개수 감소[
+                keyArray[itemnum-1] = null;
+                valueArray[itemnum-1] = null;
+                itemnum--;
+
+                return v; // 삭제된 value 리턴
+            }
+        }
+        return null;
+    }
+    // 현재 저장된 아이템 개수 반환
+    @Override
+    int length() {
+        return itemnum;
+    }
+}
+
+
+public class DictionaryApp {
+    public static void main(String[] args){
+        Dictionary dic = new Dictionary(10);
+
+        dic.put("apple","사과");
+        dic.put("banana","바나나");
+        dic.put("grape","포도");
+
+        System.out.println("banana-> "+dic.get("banana"));
+        System.out.println("삭제된 값: "+dic.delete("apple"));
+        System.out.println("apple-> "+dic.get("apple"));
+        System.out.println("현재 저장된 개수: "+dic.length());
+
+    }
+}
