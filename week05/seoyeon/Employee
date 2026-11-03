@@ -1,0 +1,74 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-01
+/// Lab4-1 : Employee 클래스 작성
+/// /////////////////////////////////////////////////
+
+
+public class Employee {
+    //property
+    private String name;
+    private String department;
+
+    //constructor
+    public Employee(String n, String d){
+        this.name = n;
+        this.department = d;
+    }
+
+    //methods
+    public double calculatePay(){
+        return 0.0;
+    }
+
+    @Override
+    public String toString() {
+        return "이름: "+name+", 부서: "+department;
+    }
+}
+
+class FullTimeEmployee extends Employee{
+    //property
+    private double monthlySalary;
+
+    //constructor
+    public FullTimeEmployee(String n, String d, double m){
+        super(n,d);
+        this.monthlySalary = m;
+    }
+
+    //methods
+    @Override
+    public double calculatePay() {
+        return monthlySalary;
+    }
+
+    @Override
+    public String toString() {
+        return "[정규직] "+super.toString()+", 월급: "+monthlySalary+"원";
+    }
+}
+
+class PartTimeEmployee extends Employee{
+    //property
+    private double hourlyRate;
+    private int workHours;
+
+    //constructor
+    public PartTimeEmployee(String n, String d, double h, int w){
+        super(n,d);
+        this.hourlyRate = h;
+        this.workHours = w;
+    }
+
+    //methods
+    @Override
+    public double calculatePay() {
+        return hourlyRate * workHours;
+    }
+
+    @Override
+    public String toString() {
+        return "[계약직] "+super.toString()+"시급: "+hourlyRate+"원, 근무시간: "+workHours+"시간";
+    }
+}
