@@ -1,0 +1,68 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-01
+/// Lab4-5 : Item 클래스 작성
+/// /////////////////////////////////////////////////
+
+public class Item {
+    //property
+    public String name;
+    public int price;
+
+    //constructor
+    public Item(String n, int p){
+        this.name = n;
+        this.price = p;
+    }
+
+    //method
+    @Override
+    public String toString() {
+        return name+"("+price+")";
+    }
+}
+
+class Food extends Item{
+    //constructor
+    public Food(String n, int p){
+        super(n,p);
+    }
+
+    //method
+    @Override
+    public String toString() {
+        return "Food: "+name+"("+price+"원)";
+    }
+}
+
+class Book extends Item{
+    //property
+    public String author;
+
+    //constructor
+    public Book(String n, int p, String a){
+        super(n,p);
+        this.author = a;
+    }
+
+    @Override
+    public String toString() {
+        return "Book: "+name+"- "+author+"("+price+")";
+    }
+}
+
+class Movie extends Item{
+    //property
+    public String director;
+
+    //constructor
+    public Movie(String n, int p, String d){
+        super(n,p);
+        this.director = d;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie: "+name+"- "+director+"("+price+"원)";
+    }
+}

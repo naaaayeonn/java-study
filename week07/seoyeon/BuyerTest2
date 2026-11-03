@@ -1,0 +1,50 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-08
+/// Lab5-4 : 쇼핑몰 구매 시뮬레이션 수정
+/// /////////////////////////////////////////////////
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class BuyerTest2 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("보유 금액을 입력하세요:");
+        int money = sc.nextInt();
+        Buyer buyer = new Buyer(money);
+
+        Item[] items = {
+                new Food("비빔밥", 9000),
+                new Food("라면", 6000),
+                new Food("김밥", 5000),
+                new Book("자바야 놀자", 20000, "오라클"),
+                new Movie("케이팝데몬헌터스", 15000, "매기강")
+        };
+
+        System.out.println("=======상품 목록(할인 적용 가격)======");
+        for(Item i: items){
+            Discountable d = (Discountable) i;
+            System.out.println(i+"->할인 가격: "+(int)d.getDiscountPrice()+"원");
+        }
+        System.out.println("\n=======구매 시도=======");
+        for(Item i: items){
+            buyer.buy(i,1);
+            System.out.println("----------------------------");
+        }
+
+        System.out.println("\n=====가격 순 정렬(기본가 기준)=====");
+        Arrays.sort(items, new Comparator<Item>(){
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.price-o2.price;
+            }
+        });
+        for(Item i: items) {
+            System.out.println(i);
+        }
+
+    }
+}

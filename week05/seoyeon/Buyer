@@ -1,0 +1,28 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-01
+/// Lab4-5 : Buyer 클래스 작성
+/// /////////////////////////////////////////////////
+
+public class Buyer {
+    //property
+    public int money;
+
+    //constructor
+    public Buyer(int m){
+        this.money = m;
+    }
+
+    //method
+    public void buy(Item t, int n){
+        if(money >= t.price*n){
+            System.out.println("구매 성공: "+t+"=> "+n+"개 구매");
+            money -= t.price*n;
+            System.out.println("남은 잔액: "+money+"원");
+        }
+        else{
+            System.out.println("잔액 부족! "+t+"구매 불가");
+            System.out.println("남은 잔액: "+money+"원");
+        }
+    }
+}
