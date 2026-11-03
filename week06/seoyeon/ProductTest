@@ -1,0 +1,23 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-01
+/// Lab4-3 : ProductTest 클래스 작성
+/// /////////////////////////////////////////////////
+
+public class ProductTest {
+    public static void main(String[] args){
+        Product[] products = new Product[6];
+
+        products[0] = new CSBook("자바 프로그래밍", 25000, "이순신", "코딩출판사");
+        products[1] = new CSBook("데이터베이스 개론", 30000, "김유신", "IT출판사");
+        products[2] = new Electronics("노트북", 1200000, "삼성", 24);
+        products[3] = new Electronics("스마트폰", 900000, "애플", 12);
+        products[4] = new CSBook("알고리즘 문제해결", 28000, "강감찬", "AlgorithmBooks");
+        products[5] = new Electronics("TV", 1500000, "LG", 36);
+
+        System.out.println("===== 쇼핑몰 상품 목록 =====");
+        for(int i=0; i<products.length; i++){
+            System.out.println(products[i]);
+        }
+    }
+}
