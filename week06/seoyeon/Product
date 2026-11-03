@@ -1,0 +1,59 @@
+/// /////////////////////////////////////////////////
+/// 작성자 : 이서연(2513707)
+/// 작성일 : 2026-10-01
+/// Lab4-3 : Product 클래스 작성
+/// /////////////////////////////////////////////////
+
+public class Product {
+    //property
+    public String name;
+    public double price;
+
+    //constructor
+    public Product(String n, double p){
+        this.name = n;
+        this.price = p;
+    }
+
+    //method
+    @Override
+    public String toString() {
+        return "상품명: "+name+", 가격: "+price+"원";
+    }
+}
+
+class CSBook extends Product{
+    //property
+    public String author;
+    public String publisher;
+
+    //constructor
+    public CSBook(String n, double p, String a, String pu){
+        super(n,p);
+        this.author = a;
+        this.publisher = pu;
+    }
+
+    //method
+    public String toString() {
+        return "[도서] "+name+"("+author+" 저,"+publisher+"), 가격: "+price+"원";
+    }
+}
+
+class Electronics extends Product{
+    //property
+    public String manufacturer;
+    public int warrantyMonths;
+
+    //constructor
+    Electronics(String n, double p, String m, int w){
+        super(n,p);
+        this.manufacturer = m;
+        this.warrantyMonths = w;
+    }
+    //methods
+    @Override
+    public String toString() {
+        return "[전자제품] "+name+"("+manufacturer+"), 보증기간: "+warrantyMonths+"개월, 가격: "+price+"원";
+    }
+}
